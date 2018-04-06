@@ -26,10 +26,17 @@ class App extends Component {
     });
   }
 
+  deleteTodo = i => {
+    let todosCopy = this.state.todo.slice();
+    todosCopy.splice(i, 1);
+
+    this.setState({ todo: todosCopy });
+  }
+
   render(){
     let bulletedTodos = this.state.todo.map((e, i) => {
       return(
-        <Singletodo todo={e}/>
+        <Singletodo todo={e} delete={() => this.deleteTodo(i)}/>
       );
     });
     return(
