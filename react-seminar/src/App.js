@@ -6,24 +6,39 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      count:0
+      todo:[],
+      currentTodo : ""
     };
-
   }
 
-  increment = () => {
+  onInputChange = e => {
+    this.setState({currentTodo: e.target.value});
+  }
+
+  onClick = () => {
+    let todosCopy = this.state.todo.slice();
+    todosCopy.push(this.state.currentTodo);
+
     this.setState({
-      count: this.state.count+1
+      todo: todosCopy, currentTodo:""
     });
   }
 
   render(){
+    let bulletedTodos = this.state.todo.map((e, i) => {
+      return(
+        <li key={i}>
+          {e}
+        </li>
+      );
+    });
     return(
-          < div >
-            <button onClick={this.increment} > increment </button> {
-              this.state.count
-            } 
-            </div>
+      <div>
+        <input placeholder="input task" value={this.state.currentTodo} onChange={this.onInputChange}/>
+        <button onClick={this.onClick}>Add!</button>
+        <br/>
+        {this.state.todo.length === 0 ? "no todos" : <ul>{bulletedTodos}</ul>}
+      </div>
     );
   }
 
