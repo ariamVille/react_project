@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Singletodo from "./SingleTodo";
+
 class App extends Component {
   constructor(){
     super();
@@ -27,9 +29,7 @@ class App extends Component {
   render(){
     let bulletedTodos = this.state.todo.map((e, i) => {
       return(
-        <li key={i}>
-          {e}
-        </li>
+        <Singletodo todo={e}/>
       );
     });
     return(
